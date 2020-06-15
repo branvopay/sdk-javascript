@@ -31,11 +31,12 @@
 
 ```javascript
 import { Configuration, Cartao } from 'branvopay';
+import { PersonType, State, Environment } from 'branvopay/enum';
 
 const payload = {
   clientName: 'string',
   clientDocument: '000.000.000-00',
-  clientType: 'PF',
+  clientType: PersonType['PESSOA_FISICA'],
   clientMail: 'user@example.com',
   clientPhone: '(00) 0 0000-0000',
   clientSecondaryMail: 'user@example.com',
@@ -44,7 +45,7 @@ const payload = {
   billingNumber: 'string',
   billingNeighbourhood: 'string',
   billingCity: 'string',
-  billingState: 'SP',
+  billingState: State['SAO_PAULO'],
   billingPostcode: '00000-000',
   billingComplement: 'string',
   billingResponsible: 'string',
@@ -52,12 +53,12 @@ const payload = {
   deliveryNumber: 'string',
   deliveryNeighbourhood: 'string',
   deliveryCity: 'string',
-  deliveryState: 'SP',
+  deliveryState: State['SAO_PAULO'],
   deliveryPostcode: '00000-000',
   deliveryComplement: 'string',
   deliveryResponsible: 'string',
   cardOwnerName: 'string',
-  cardOwnerType: 'PF',
+  cardOwnerType: PersonType['PESSOA_FISICA'],
   cardOwnerDocument: '000.000.000-000',
   cardOwnerPhone: '(00) 0 0000-0000',
   cardFlag: 'string',
@@ -79,7 +80,7 @@ const payload = {
 
 const config = new Configuration({
   token: 'string',
-  env: Environment.SANDBOX,
+  env: Environment['SANDBOX'],
 });
 
 const cartao = new Cartao(config);
