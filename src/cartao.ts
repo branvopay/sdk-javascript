@@ -9,20 +9,25 @@ import { GetResponse } from './interfaces/get-response';
 import { CaptureResponse } from './interfaces/capture-response';
 import { CancelResponse } from './interfaces/cancel-response';
 import { Response } from './response';
+import { ConfigurationInterface } from './interfaces/configuration';
 
 export class Cartao extends Api implements CartaoInterface {
-  public async transaction(params: Transaction): Promise<ResponseInterface<TransactionResponse>> {
+  public constructor(configuration: ConfigurationInterface) {
+    super('cartao', 'v2', configuration);
+  }
+
+  public async transaction(payload: Transaction): Promise<ResponseInterface<TransactionResponse>> {
     try {
-      const response = await this.client.get('new', { params });
+      const response = await this.client.post('new', payload);
       return new Response(response);
     } catch (error) {
       return new Response(error.response);
     }
   }
 
-  public async split(params: Split): Promise<ResponseInterface<SplitResponse>> {
+  public async split(payload: Split): Promise<ResponseInterface<SplitResponse>> {
     try {
-      const response = await this.client.get('split', { params });
+      const response = await this.client.post('split', payload);
       return new Response(response);
     } catch (error) {
       return new Response(error.response);
@@ -40,7 +45,7 @@ export class Cartao extends Api implements CartaoInterface {
 
   public async cancel(orderNumber: string): Promise<ResponseInterface<CancelResponse[]>> {
     try {
-      const response = await this.client.get(`cancel/${orderNumber}`);
+      const response = await this.client.put(`cancel/${orderNumber}`);
       return new Response(response);
     } catch (error) {
       return new Response(error.response);
@@ -49,7 +54,7 @@ export class Cartao extends Api implements CartaoInterface {
 
   public async capture(orderNumber: string): Promise<ResponseInterface<CaptureResponse>> {
     try {
-      const response = await this.client.get(`capture/${orderNumber}`);
+      const response = await this.client.put(`capture/${orderNumber}`);
       return new Response(response);
     } catch (error) {
       return new Response(error.response);

@@ -4,10 +4,19 @@
   "description": "SDK de Integração Api Branvopay",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "jest"
+  },
   "dependencies": {
-    "axios": "^0.19.2"
+    "axios": "^0.19.2",
+    "moment": "^2.26.0"
   },
   "devDependencies": {
-    "jest": "^26.0.1"
+    "@babel/preset-env": "^7.10.2",
+    "@babel/preset-typescript": "^7.10.1",
+    "@types/jest": "^26.0.0",
+    "jest": "^26.0.1",
+    "ts-jest": "^26.1.0",
+    "typescript": "^3.9.5"
   }
 }
