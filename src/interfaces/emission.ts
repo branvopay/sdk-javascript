@@ -1,0 +1,32 @@
+export interface Emission {
+  clientName: string;
+  clientDocument: string;
+  clientType: string;
+  clientMail: string;
+  clientSecondaryMail: string;
+  clientPhone: string;
+  clientBirthDate: string;
+  billingStreet: string;
+  billingNumber: string;
+  billingComplement: string;
+  billingNeighbourhood: string;
+  billingCity: string;
+  billingState: string;
+  billingPostcode: string;
+  description: string;
+  reference: string;
+  amount: number;
+  dueDate: string;
+  installments: number;
+  maxOverdueDays: number;
+  fine: number;
+  interest: number;
+  abbreviate: boolean;
+  logo: string;
+  notificationUrl: string;
+  showTop: boolean;
+  split: boolean;
+  splitType: string;
+  splitAmount: number[];
+  splitToken: string[];
+}

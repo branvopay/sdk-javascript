@@ -1,0 +1,10 @@
+{
+  "name": "branvopay",
+  "version": "1.0.0",
+  "description": "SDK de Integração Api Branvopay",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
+}
