@@ -8,9 +8,11 @@ import { SplitResponse } from './interfaces/split-response';
 import { GetResponse } from './interfaces/get-response';
 import { CaptureResponse } from './interfaces/capture-response';
 import { CancelResponse } from './interfaces/cancel-response';
+import { ConfigurationInterface } from './interfaces/configuration';
 export declare class Cartao extends Api implements CartaoInterface {
-    transaction(params: Transaction): Promise<ResponseInterface<TransactionResponse>>;
-    split(params: Split): Promise<ResponseInterface<SplitResponse>>;
+    constructor(configuration: ConfigurationInterface);
+    transaction(payload: Transaction): Promise<ResponseInterface<TransactionResponse>>;
+    split(payload: Split): Promise<ResponseInterface<SplitResponse>>;
     get(orderNumber: string): Promise<ResponseInterface<GetResponse>>;
     cancel(orderNumber: string): Promise<ResponseInterface<CancelResponse[]>>;
     capture(orderNumber: string): Promise<ResponseInterface<CaptureResponse>>;

@@ -1,4 +1,4 @@
-export interface Configuration {
+export interface ConfigurationInterface {
     /**
      * Retorna o token da conta
      */

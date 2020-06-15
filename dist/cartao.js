@@ -13,10 +13,13 @@ exports.Cartao = void 0;
 const api_1 = require("./api");
 const response_1 = require("./response");
 class Cartao extends api_1.Api {
-    transaction(params) {
+    constructor(configuration) {
+        super('cartao', 'v2', configuration);
+    }
+    transaction(payload) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield this.client.get('new', { params });
+                const response = yield this.client.post('new', payload);
                 return new response_1.Response(response);
             }
             catch (error) {
@@ -24,10 +27,10 @@ class Cartao extends api_1.Api {
             }
         });
     }
-    split(params) {
+    split(payload) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield this.client.get('split', { params });
+                const response = yield this.client.post('split', payload);
                 return new response_1.Response(response);
             }
             catch (error) {
@@ -49,7 +52,7 @@ class Cartao extends api_1.Api {
     cancel(orderNumber) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield this.client.get(`cancel/${orderNumber}`);
+                const response = yield this.client.put(`cancel/${orderNumber}`);
                 return new response_1.Response(response);
             }
             catch (error) {
@@ -60,7 +63,7 @@ class Cartao extends api_1.Api {
     capture(orderNumber) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield this.client.get(`capture/${orderNumber}`);
+                const response = yield this.client.put(`capture/${orderNumber}`);
                 return new response_1.Response(response);
             }
             catch (error) {

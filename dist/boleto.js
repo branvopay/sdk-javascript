@@ -13,6 +13,9 @@ exports.Boleto = void 0;
 const api_1 = require("./api");
 const response_1 = require("./response");
 class Boleto extends api_1.Api {
+    constructor(configuration) {
+        super('boleto', 'v2', configuration);
+    }
     emission(payload) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
