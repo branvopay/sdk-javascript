@@ -5,13 +5,14 @@ export interface SplitItem {
 
 export interface SplitResponse {
   code: number;
+  authUrl: string;
+  accountName: string;
+  payerName: string;
   orderNumber: string;
   status: number;
   amount: number;
   fraudPoints: number;
   dateAnalysis: string;
-  queueOrder: number;
-  retry: boolean;
   message: string;
   split: SplitItem[];
 }
