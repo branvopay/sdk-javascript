@@ -1,10 +1,8 @@
 import moment from 'moment';
-import { Cartao } from '../src/cartao';
-import { Configuration } from '../src/configuration';
-import { Transaction } from '../src/interfaces/transaction';
-import { PersonType } from '../src/enum/person-type';
-import { State } from '../src/enum/state';
-import { Environment } from '../src/enum/environment';
+
+import { Cartao, Configuration } from '../src';
+import { Transaction } from '../src/interfaces';
+import { PersonType, State, Environment, TaxRule, SplitType } from '../src/enum';
 
 const payload: Transaction = {
   clientName: 'Nome Completo',
@@ -60,6 +58,25 @@ test('should make new transaction', async () => {
   const cartao = new Cartao(config);
 
   const response = await cartao.transaction(payload);
+
+  expect(response.success).toBe(true);
+});
+
+test('should make payment split', async () => {
+  const config = new Configuration({
+    token: '23B5E1AE45EE03313AD3C3EC0B083707',
+    env: Environment.SANDBOX,
+  });
+
+  const cartao = new Cartao(config);
+
+  const response = await cartao.split({
+    ...payload,
+    taxRule: TaxRule.DIVIDED,
+    splitType: SplitType.PERCENTAGE,
+    splitAmount: [50, 50],
+    splitToken: ['23B5E1AE45EE03313AD3C3EC0B083707', '0B34974F15D91716E9277F985FC98AC0'],
+  });
 
   expect(response.success).toBe(true);
 });
