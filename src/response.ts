@@ -11,7 +11,7 @@ export class Response<T> implements ResponseInterface<T> {
     this.success = response.data.success;
 
     if (this.success) {
-      this.data = response.data;
+      this.data = response.data.data;
     } else {
       this.error = { code: response.data.errorCode, message: response.data.errorMessage };
     }
