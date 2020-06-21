@@ -4,7 +4,7 @@ import { Cartao, Configuration } from '../src';
 import { Transaction } from '../src/interfaces';
 import { PersonType, State, Environment, TaxRule, SplitType } from '../src/enum';
 
-const payload: Transaction = {
+const payload: () => Transaction = () => ({
   clientName: 'Nome Completo',
   clientDocument: '437.283.950-21',
   clientType: PersonType.PESSOA_FISICA,
@@ -38,7 +38,7 @@ const payload: Transaction = {
   cardYear: moment().format('yyyy-MM-dd'),
   cardCode: '123',
   antiFraud: true,
-  orderNumber: (Math.random() * 999999999).toString().padStart(9, '0'),
+  orderNumber: new Date().getTime().toString(),
   value: 1,
   parcelNumber: 1,
   capture: true,
@@ -47,7 +47,7 @@ const payload: Transaction = {
   os: 'string',
   notificationUrl: 'string',
   browser: 'string',
-};
+});
 
 test('should make new transaction', async () => {
   const config = new Configuration({
@@ -57,7 +57,7 @@ test('should make new transaction', async () => {
 
   const cartao = new Cartao(config);
 
-  const response = await cartao.transaction(payload);
+  const response = await cartao.transaction(payload());
 
   expect(response.success).toBe(true);
 });
@@ -71,12 +71,27 @@ test('should make payment split', async () => {
   const cartao = new Cartao(config);
 
   const response = await cartao.split({
-    ...payload,
+    ...payload(),
     taxRule: TaxRule.DIVIDED,
     splitType: SplitType.PERCENTAGE,
     splitAmount: [50, 50],
     splitToken: ['23B5E1AE45EE03313AD3C3EC0B083707', '0B34974F15D91716E9277F985FC98AC0'],
   });
+
+  expect(response.success).toBe(true);
+});
+
+test('should make cancel', async () => {
+  const config = new Configuration({
+    token: '23B5E1AE45EE03313AD3C3EC0B083707',
+    env: Environment.SANDBOX,
+  });
+
+  const cartao = new Cartao(config);
+
+  const orderNumber = (await cartao.transaction(payload())).data.orderNumber;
+
+  const response = await cartao.cancel(orderNumber);
 
   expect(response.success).toBe(true);
 });
