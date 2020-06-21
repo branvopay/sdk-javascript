@@ -100,8 +100,15 @@ if (response.success) {
 
 ```typescript
 import { Configuration, Cartao } from 'branvopay';
-import { Transaction } from 'branvopay/interfaces';
 import { PersonType, State, Environment } from 'branvopay/enum';
+import {
+  Transaction,
+  ConfigurationInterface,
+  CartaoInterface,
+  ResponseInterface,
+  TransactionResponse,
+  Error,
+} from 'branvopay/interfaces';
 
 const payload: Transaction = {
   clientName: 'string',
@@ -148,21 +155,21 @@ const payload: Transaction = {
   browser: 'string',
 };
 
-const config = new Configuration({
+const config: ConfigurationInterface = new Configuration({
   token: 'string',
   env: Environment.SANDBOX,
 });
 
-const cartao = new Cartao(config);
+const cartao: CartaoInterface = new Cartao(config);
 
-const response = await cartao.transaction(payload);
+const response: ResponseInterface<TransactionResponse> = await cartao.transaction(payload);
 
 if (response.success) {
-  const data = response.data;
+  const data: TransactionResponse = response.data;
 } else {
-  const error = response.error;
-  const code = error.code;
-  const message = error.message;
+  const error: Error = response.error;
+  const code: string = error.code;
+  const message: string = error.message;
 }
 ```
 
@@ -243,10 +250,17 @@ if (response.success) {
 
 ```typescript
 import { Configuration, Cartao } from 'branvopay';
-import { Transaction } from 'branvopay/interfaces';
 import { PersonType, State, Environment, TaxRule, SplitType } from 'branvopay/enum';
+import {
+  Split,
+  ConfigurationInterface,
+  CartaoInterface,
+  ResponseInterface,
+  SplitResponse,
+  Error,
+} from 'branvopay/interfaces';
 
-const payload: Transaction = {
+const payload: Split = {
   clientName: 'string',
   clientDocument: '000.000.000-00',
   clientType: PersonType.PESSOA_FISICA,
@@ -295,21 +309,21 @@ const payload: Transaction = {
   splitToken: ['23B5E1AE45EE03313AD3C3EC0B083707', '0B34974F15D91716E9277F985FC98AC0'],
 };
 
-const config = new Configuration({
+const config: ConfigurationInterface = new Configuration({
   token: 'string',
   env: Environment.SANDBOX,
 });
 
-const cartao = new Cartao(config);
+const cartao: CartaoInterface = new Cartao(config);
 
-const response = await cartao.split(payload);
+const response: ResponseInterface<SplitResponse> = await cartao.split(payload);
 
 if (response.success) {
-  const data = response.data;
+  const data: SplitResponse = response.data;
 } else {
-  const error = response.error;
-  const code = error.code;
-  const message = error.message;
+  const error: Error = response.error;
+  const code: string = error.code;
+  const message: string = error.message;
 }
 ```
 
@@ -342,8 +356,42 @@ if (response.success) {
 
 ```typescript
 import { Configuration, Cartao } from 'branvopay';
+import {
+  ConfigurationInterface,
+  CartaoInterface,
+  ResponseInterface,
+  CancelResponse,
+  Error,
+} from 'branvopay/interfaces';
+
+const orderNumber: string = 'string';
+
+const config: ConfigurationInterface = new Configuration({
+  token: 'string',
+  env: Environment.SANDBOX,
+});
+
+const cartao: CartaoInterface = new Cartao(config);
+
+const response: ResponseInterface<CancelResponse> = await cartao.cancel(orderNumber);
+
+if (response.success) {
+  const data: CancelResponse = response.data;
+} else {
+  const error: Error = response.error;
+  const code: string = error.code;
+  const message: string = error.message;
+}
+```
+
+#### Estorno Parcial
+
+```javascript
+import { Configuration, Cartao } from 'branvopay';
 
 const orderNumber = 'string';
+
+const amount = 100.0;
 
 const config = new Configuration({
   token: 'string',
@@ -352,7 +400,7 @@ const config = new Configuration({
 
 const cartao = new Cartao(config);
 
-const response = await cartao.cancel(orderNumber);
+const response = await cartao.cancel(orderNumber, amount);
 
 if (response.success) {
   const data = response.data;
@@ -360,6 +408,40 @@ if (response.success) {
   const error = response.error;
   const code = error.code;
   const message = error.message;
+}
+```
+
+##### Typescript
+
+```typescript
+import { Configuration, Cartao } from 'branvopay';
+import {
+  ConfigurationInterface,
+  CartaoInterface,
+  ResponseInterface,
+  CancelResponse,
+  Error,
+} from 'branvopay/interfaces';
+
+const amount: number = 100.0;
+
+const orderNumber: string = 'string';
+
+const config: ConfigurationInterface = new Configuration({
+  token: 'string',
+  env: Environment.SANDBOX,
+});
+
+const cartao: CartaoInterface = new Cartao(config);
+
+const response: ResponseInterface<CancelResponse> = await cartao.cancel(orderNumber, amount);
+
+if (response.success) {
+  const data: CancelResponse = response.data;
+} else {
+  const error: Error = response.error;
+  const code: string = error.code;
+  const message: string = error.message;
 }
 ```
 
