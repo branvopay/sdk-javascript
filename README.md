@@ -315,7 +315,52 @@ if (response.success) {
 
 #### Cancelamento
 
+```javascript
+import { Configuration, Cartao } from 'branvopay';
+
+const orderNumber = 'string';
+
+const config = new Configuration({
+  token: 'string',
+  env: Environment.SANDBOX,
+});
+
+const cartao = new Cartao(config);
+
+const response = await cartao.cancel(orderNumber);
+
+if (response.success) {
+  const data = response.data;
+} else {
+  const error = response.error;
+  const code = error.code;
+  const message = error.message;
+}
+```
+
+##### Typescript
+
 ```typescript
+import { Configuration, Cartao } from 'branvopay';
+
+const orderNumber = 'string';
+
+const config = new Configuration({
+  token: 'string',
+  env: Environment.SANDBOX,
+});
+
+const cartao = new Cartao(config);
+
+const response = await cartao.cancel(orderNumber);
+
+if (response.success) {
+  const data = response.data;
+} else {
+  const error = response.error;
+  const code = error.code;
+  const message = error.message;
+}
 ```
 
 #### Consulta
