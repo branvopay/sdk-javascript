@@ -11,6 +11,8 @@ import { CancelResponse } from './interfaces/cancel-response';
 import { Response } from './response';
 import { ConfigurationInterface } from './interfaces/configuration';
 
+import qs from 'query-string';
+
 export class Cartao extends Api implements CartaoInterface {
   public constructor(configuration: ConfigurationInterface) {
     super('cartao', 'v2', configuration);
@@ -43,9 +45,9 @@ export class Cartao extends Api implements CartaoInterface {
     }
   }
 
-  public async cancel(orderNumber: string): Promise<ResponseInterface<CancelResponse[]>> {
+  public async cancel(orderNumber: string, amount?: number): Promise<ResponseInterface<CancelResponse[]>> {
     try {
-      const response = await this.client.put(`cancel/${orderNumber}`);
+      const response = await this.client.put(`cancel/${orderNumber}?${qs.stringify({ amount })}`);
       return new Response(response);
     } catch (error) {
       return new Response(error.response);

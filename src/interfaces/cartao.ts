@@ -26,7 +26,7 @@ export interface CartaoInterface {
   /**
    * Realiza o cancelamento e estorno da transação
    */
-  cancel: (orderNumber: string) => Promise<ResponseInterface<CancelResponse[]>>;
+  cancel: (orderNumber: string, amount?: number) => Promise<ResponseInterface<CancelResponse[]>>;
 
   /**
    * Realiza a captura da transação

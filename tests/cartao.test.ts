@@ -39,7 +39,7 @@ const payload: () => Transaction = () => ({
   cardCode: '123',
   antiFraud: true,
   orderNumber: new Date().getTime().toString(),
-  value: 1,
+  value: 100.0,
   parcelNumber: 1,
   capture: true,
   abbreviate: true,
@@ -92,6 +92,25 @@ test('should make cancel', async () => {
   const orderNumber = (await cartao.transaction(payload())).data.orderNumber;
 
   const response = await cartao.cancel(orderNumber);
+
+  expect(response.success).toBe(true);
+});
+
+test('should make partial cancel', async () => {
+  const config = new Configuration({
+    token: '23B5E1AE45EE03313AD3C3EC0B083707',
+    env: Environment.SANDBOX,
+  });
+
+  const cartao = new Cartao(config);
+
+  const orderNumber = (await cartao.transaction(payload())).data.orderNumber;
+
+  const amount = 50;
+
+  const response = await cartao.cancel(orderNumber, amount);
+
+  console.log(response);
 
   expect(response.success).toBe(true);
 });
