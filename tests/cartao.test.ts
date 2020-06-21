@@ -1,7 +1,13 @@
 import moment from 'moment';
 
 import { Cartao, Configuration } from '../src';
-import { Transaction } from '../src/interfaces';
+import {
+  Transaction,
+  ConfigurationInterface,
+  CartaoInterface,
+  ResponseInterface,
+  TransactionResponse,
+} from '../src/interfaces';
 import { PersonType, State, Environment, TaxRule, SplitType } from '../src/enum';
 
 const payload: () => Transaction = () => ({
@@ -50,14 +56,14 @@ const payload: () => Transaction = () => ({
 });
 
 test('should make new transaction', async () => {
-  const config = new Configuration({
+  const config: ConfigurationInterface = new Configuration({
     token: '23B5E1AE45EE03313AD3C3EC0B083707',
     env: Environment.SANDBOX,
   });
 
-  const cartao = new Cartao(config);
+  const cartao: CartaoInterface = new Cartao(config);
 
-  const response = await cartao.transaction(payload());
+  const response: ResponseInterface<TransactionResponse> = await cartao.transaction(payload());
 
   expect(response.success).toBe(true);
 });
@@ -109,8 +115,6 @@ test('should make partial cancel', async () => {
   const amount = 50;
 
   const response = await cartao.cancel(orderNumber, amount);
-
-  console.log(response);
 
   expect(response.success).toBe(true);
 });
