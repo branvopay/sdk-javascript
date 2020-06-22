@@ -133,3 +133,18 @@ test('should consult transaction', async () => {
 
   expect(response.success).toBe(true);
 });
+
+test('should capture transaction', async () => {
+  const config = new Configuration({
+    token: '23B5E1AE45EE03313AD3C3EC0B083707',
+    env: Environment.SANDBOX,
+  });
+
+  const cartao = new Cartao(config);
+
+  const orderNumber = (await cartao.transaction(payload())).data.orderNumber;
+
+  const response = await cartao.capture(orderNumber);
+
+  expect(response.success).toBe(true);
+});
