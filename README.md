@@ -447,7 +447,53 @@ if (response.success) {
 
 #### Consulta
 
+```javascript
+import { Configuration, Cartao } from 'branvopay';
+
+const orderNumber = 'string';
+
+const config = new Configuration({
+  token: 'string',
+  env: Environment.SANDBOX,
+});
+
+const cartao = new Cartao(config);
+
+const response = await cartao.get(orderNumber);
+
+if (response.success) {
+  const data = response.data;
+} else {
+  const error = response.error;
+  const code = error.code;
+  const message = error.message;
+}
+```
+
+##### Typescript
+
 ```typescript
+import { Configuration, Cartao } from 'branvopay';
+import { ConfigurationInterface, CartaoInterface, ResponseInterface, GetResponse, Error } from 'branvopay/interfaces';
+
+const orderNumber: string = 'string';
+
+const config: ConfigurationInterface = new Configuration({
+  token: 'string',
+  env: Environment.SANDBOX,
+});
+
+const cartao: CartaoInterface = new Cartao(config);
+
+const response: ResponseInterface<GetResponse> = await cartao.get(orderNumber);
+
+if (response.success) {
+  const data: GetResponse = response.data;
+} else {
+  const error: Error = response.error;
+  const code: string = error.code;
+  const message: string = error.message;
+}
 ```
 
 #### Captura
