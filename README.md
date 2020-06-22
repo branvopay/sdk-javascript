@@ -498,5 +498,57 @@ if (response.success) {
 
 #### Captura
 
+```javascript
+import { Configuration, Cartao } from 'branvopay';
+
+const orderNumber = 'string';
+
+const config = new Configuration({
+  token: 'string',
+  env: Environment.SANDBOX,
+});
+
+const cartao = new Cartao(config);
+
+const response = await cartao.capture(orderNumber);
+
+if (response.success) {
+  const data = response.data;
+} else {
+  const error = response.error;
+  const code = error.code;
+  const message = error.message;
+}
+```
+
+##### Typescript
+
 ```typescript
+import { Configuration, Cartao } from 'branvopay';
+import {
+  ConfigurationInterface,
+  CartaoInterface,
+  ResponseInterface,
+  CaptureResponse,
+  Error,
+} from 'branvopay/interfaces';
+
+const orderNumber: string = 'string';
+
+const config: ConfigurationInterface = new Configuration({
+  token: 'string',
+  env: Environment.SANDBOX,
+});
+
+const cartao: CartaoInterface = new Cartao(config);
+
+const response: ResponseInterface<CaptureResponse> = await cartao.capture(orderNumber);
+
+if (response.success) {
+  const data: CaptureResponse = response.data;
+} else {
+  const error: Error = response.error;
+  const code: string = error.code;
+  const message: string = error.message;
+}
 ```
