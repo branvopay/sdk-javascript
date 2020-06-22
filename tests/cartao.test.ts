@@ -119,7 +119,7 @@ test('should make partial cancel', async () => {
   expect(response.success).toBe(true);
 });
 
-test.only('should consult transaction', async () => {
+test('should consult transaction', async () => {
   const config = new Configuration({
     token: '23B5E1AE45EE03313AD3C3EC0B083707',
     env: Environment.SANDBOX,
