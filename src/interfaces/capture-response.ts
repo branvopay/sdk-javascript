@@ -3,6 +3,6 @@ export interface CaptureResponse {
   accountName: string;
   orderNumber: string;
   status: number;
-  date: string;
+  dateAnalysis: string;
   message: string;
 }
