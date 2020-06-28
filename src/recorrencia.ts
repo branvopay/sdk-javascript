@@ -12,7 +12,7 @@ export class Recorrencia extends Api implements RecorrenciaInterface {
     super('cartao', 'v2', configuration);
   }
 
-  public async save(payload: RecorrenciaModel, code?: string): Promise<ResponseInterface<RecorrenciaResponse>> {
+  public async save(payload: RecorrenciaModel, code?: number): Promise<ResponseInterface<RecorrenciaResponse>> {
     try {
       const response = await this.client.post(code ? `recurrent/${code}` : 'recurrent', payload);
       return new Response(response);
@@ -21,7 +21,7 @@ export class Recorrencia extends Api implements RecorrenciaInterface {
     }
   }
 
-  public async get(code: string): Promise<ResponseInterface<RecorrenciaResponse>> {
+  public async get(code: number): Promise<ResponseInterface<RecorrenciaResponse>> {
     try {
       const response = await this.client.post(`recurrent/${code}`);
       return new Response(response);

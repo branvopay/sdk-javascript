@@ -59,7 +59,7 @@ const payload: () => RecorrenciaModel = () => ({
   finalDate: moment().add(6, 'months').format('YYYY-MM-DD'),
 });
 
-test.only('should add recurrence', async () => {
+test('should add recurrence', async () => {
   const config: ConfigurationInterface = new Configuration({
     token: '23B5E1AE45EE03313AD3C3EC0B083707',
     env: Environment.SANDBOX,
@@ -70,4 +70,29 @@ test.only('should add recurrence', async () => {
   const response: ResponseInterface<RecorrenciaResponse> = await recorrencia.save(payload());
 
   expect(response.success).toBe(true);
+});
+
+test.only('should update recurrence', async () => {
+  const config: ConfigurationInterface = new Configuration({
+    token: '23B5E1AE45EE03313AD3C3EC0B083707',
+    env: Environment.SANDBOX,
+  });
+
+  const recorrencia: RecorrenciaInterface = new Recorrencia(config);
+
+  const addResponse: ResponseInterface<RecorrenciaResponse> = await recorrencia.save(payload());
+
+  const updatePayload = () => ({
+    frequence: Frequence.MONTHLY,
+    amount: 100.0,
+    dayNumber: 15,
+    finalDate: moment().add(6, 'months').format('YYYY-MM-DD'),
+    active: true,
+  });
+
+  const code = addResponse.data.recurrence.code;
+
+  const updateResponse: ResponseInterface<RecorrenciaResponse> = await recorrencia.save(updatePayload(), code);
+
+  expect(updateResponse.success).toBe(true);
 });

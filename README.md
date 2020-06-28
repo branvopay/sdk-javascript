@@ -708,3 +708,79 @@ if (response.success) {
   const message: string = error.message;
 }
 ```
+
+#### Atualizar Recorrência
+
+```javascript
+import { Configuration, Recorrencia } from 'branvopay';
+import { Frequence } from 'branvopay/enum';
+
+const code = 0;
+
+const payload = {
+  frequence: Frequence.MONTHLY,
+  amount: 100.0,
+  dayNumber: 15,
+  finalDate: 'string',
+  active: true,
+};
+
+const config = new Configuration({
+  token: 'string',
+  env: Environment.SANDBOX,
+});
+
+const recorrencia = new Recorrencia(config);
+
+const response = await recorrencia.save(payload, code);
+
+if (response.success) {
+  const data = response.data;
+} else {
+  const error = response.error;
+  const code = error.code;
+  const message = error.message;
+}
+```
+
+##### Typescript
+
+```typescript
+import { Configuration, Recorrencia } from 'branvopay';
+import { Frequence } from 'branvopay/enum';
+import {
+  RecorrenciaUpdateModel,
+  ConfigurationInterface,
+  RecorrenciaInterface,
+  ResponseInterface,
+  RecorrenciaResponse,
+  Error,
+} from 'branvopay/interfaces';
+
+const code: number = 0;
+
+const payload: RecorrenciaUpdateModel = {
+  frequence: Frequence.MONTHLY,
+  amount: 100.0,
+  dayNumber: 15,
+  finalDate: 'string',
+  active: true,
+};
+
+const config: ConfigurationInterface = new Configuration({
+  token: 'string',
+  env: Environment.SANDBOX,
+});
+
+const recorrencia: RecorrenciaInterface = new Recorrencia(config);
+
+const response: ResponseInterface<RecorrenciaResponse> = await recorrencia.save(payload, code);
+
+if (response.success) {
+  const data: RecorrenciaResponse = response.data;
+} else {
+  const error: Error = response.error;
+  const code: string = error.code;
+  const message: string = error.message;
+}
+```
