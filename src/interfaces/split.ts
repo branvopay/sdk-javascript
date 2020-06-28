@@ -1,4 +1,6 @@
-export interface Split {
+import { Transaction } from './transaction';
+
+export interface Split extends Transaction {
   taxRule: string;
   splitType: string;
   splitAmount: number[];

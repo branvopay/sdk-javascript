@@ -13,3 +13,6 @@ export * from './split';
 export * from './split-response';
 export * from './transaction';
 export * from './transaction-response';
+export * from './recorrencia';
+export * from './recorrencia-model';
+export * from './recorrencia-response';
