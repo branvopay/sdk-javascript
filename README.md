@@ -11,8 +11,8 @@
 #### Emissão
 
 ```javascript
-import { Boleto, Configuration } from '../src';
-import { PersonType, State, Environment, SplitType } from '../src/enum';
+import { Boleto, Configuration } from 'branvopay';
+import { PersonType, State, Environment, SplitType } from 'branvopay/enum';
 
 const payload = {
   clientName: 'string',
@@ -66,15 +66,15 @@ if (response.success) {
 ```
 
 ```typescript
-import { Boleto, Configuration } from '../src';
+import { Boleto, Configuration } from 'branvopay';
 import {
   ConfigurationInterface,
   BoletoInterface,
   ResponseInterface,
   Emission,
   EmissionResponse,
-} from '../src/interfaces';
-import { PersonType, State, Environment, SplitType } from '../src/enum';
+} from 'branvopay/interfaces';
+import { PersonType, State, Environment, SplitType } from 'branvopay/enum';
 
 const payload: Emission = {
   clientName: 'string',
@@ -134,7 +134,53 @@ if (response.success) {
 
 #### Cancelamento
 
+```javascript
+import { Boleto, Configuration } from 'branvopay';
+import { PersonType, State, Environment, SplitType } from 'branvopay/enum';
+
+const code = 'string';
+
+const config = new Configuration({
+  token: 'string',
+  env: Environment.SANDBOX,
+});
+
+const boleto = new Boleto(config);
+
+const response = await boleto.cancel(code);
+
+if (response.success) {
+  const data = response.data;
+} else {
+  const error = response.error;
+  const code = error.code;
+  const message = error.message;
+}
+```
+
 ```typescript
+import { Boleto, Configuration } from 'branvopay';
+import { ConfigurationInterface, BoletoInterface, ResponseInterface, EmissionResponse } from 'branvopay/interfaces';
+import { PersonType, State, Environment, SplitType } from 'branvopay/enum';
+
+const code = 'string';
+
+const config: ConfigurationInterface = new Configuration({
+  token: 'string',
+  env: Environment.SANDBOX,
+});
+
+const boleto: BoletoInterface = new Boleto(config);
+
+const response: ResponseInterface<EmissionResponse> = await boleto.cancel(code);
+
+if (response.success) {
+  const data: EmissionResponse = response.data;
+} else {
+  const error: Error = response.error;
+  const code: string = error.code;
+  const message: string = error.message;
+}
 ```
 
 ### Cartão

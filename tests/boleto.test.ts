@@ -55,3 +55,20 @@ test('should emit boleto', async () => {
 
   expect(response.success).toBe(true);
 });
+
+test('should cancel boleto', async () => {
+  const config: ConfigurationInterface = new Configuration({
+    token: '23B5E1AE45EE03313AD3C3EC0B083707',
+    env: Environment.SANDBOX,
+  });
+
+  const boleto: BoletoInterface = new Boleto(config);
+
+  const emitResponse: ResponseInterface<EmissionResponse> = await boleto.emission(payload());
+
+  const code = emitResponse.data.charges[0].code;
+
+  const cancelResponse: ResponseInterface<EmissionResponse> = await boleto.cancel(code);
+
+  expect(cancelResponse.success).toBe(true);
+});
