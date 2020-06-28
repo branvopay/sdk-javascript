@@ -784,3 +784,60 @@ if (response.success) {
   const message: string = error.message;
 }
 ```
+
+#### Consultar Recorrência
+
+```javascript
+import { Configuration, Recorrencia } from 'branvopay';
+
+const code = 0;
+
+const config = new Configuration({
+  token: 'string',
+  env: Environment.SANDBOX,
+});
+
+const recorrencia = new Recorrencia(config);
+
+const response = await recorrencia.get(code);
+
+if (response.success) {
+  const data = response.data;
+} else {
+  const error = response.error;
+  const code = error.code;
+  const message = error.message;
+}
+```
+
+##### Typescript
+
+```typescript
+import { Configuration, Recorrencia } from 'branvopay';
+import {
+  ConfigurationInterface,
+  RecorrenciaInterface,
+  ResponseInterface,
+  RecorrenciaResponse,
+  Error,
+} from 'branvopay/interfaces';
+
+const code: number = 0;
+
+const config: ConfigurationInterface = new Configuration({
+  token: 'string',
+  env: Environment.SANDBOX,
+});
+
+const recorrencia: RecorrenciaInterface = new Recorrencia(config);
+
+const response: ResponseInterface<RecorrenciaResponse> = await recorrencia.get(code);
+
+if (response.success) {
+  const data: RecorrenciaResponse = response.data;
+} else {
+  const error: Error = response.error;
+  const code: string = error.code;
+  const message: string = error.message;
+}
+```

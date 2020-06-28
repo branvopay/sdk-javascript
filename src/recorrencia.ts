@@ -23,7 +23,7 @@ export class Recorrencia extends Api implements RecorrenciaInterface {
 
   public async get(code: number): Promise<ResponseInterface<RecorrenciaResponse>> {
     try {
-      const response = await this.client.post(`recurrent/${code}`);
+      const response = await this.client.get(`recurrent/${code}`);
       return new Response(response);
     } catch (error) {
       return new Response(error.response);

@@ -72,7 +72,7 @@ test('should add recurrence', async () => {
   expect(response.success).toBe(true);
 });
 
-test.only('should update recurrence', async () => {
+test('should update recurrence', async () => {
   const config: ConfigurationInterface = new Configuration({
     token: '23B5E1AE45EE03313AD3C3EC0B083707',
     env: Environment.SANDBOX,
@@ -95,4 +95,21 @@ test.only('should update recurrence', async () => {
   const updateResponse: ResponseInterface<RecorrenciaResponse> = await recorrencia.save(updatePayload(), code);
 
   expect(updateResponse.success).toBe(true);
+});
+
+test.only('should get recurrence', async () => {
+  const config: ConfigurationInterface = new Configuration({
+    token: '23B5E1AE45EE03313AD3C3EC0B083707',
+    env: Environment.SANDBOX,
+  });
+
+  const recorrencia: RecorrenciaInterface = new Recorrencia(config);
+
+  const addResponse: ResponseInterface<RecorrenciaResponse> = await recorrencia.save(payload());
+
+  const code = addResponse.data.recurrence.code;
+
+  const getResponse: ResponseInterface<RecorrenciaResponse> = await recorrencia.get(code);
+
+  expect(getResponse.success).toBe(true);
 });
