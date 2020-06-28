@@ -97,7 +97,7 @@ test('should update recurrence', async () => {
   expect(updateResponse.success).toBe(true);
 });
 
-test.only('should get recurrence', async () => {
+test('should get recurrence', async () => {
   const config: ConfigurationInterface = new Configuration({
     token: '23B5E1AE45EE03313AD3C3EC0B083707',
     env: Environment.SANDBOX,

@@ -10,7 +10,121 @@
 
 #### Emissão
 
+```javascript
+import { Boleto, Configuration } from '../src';
+import { PersonType, State, Environment, SplitType } from '../src/enum';
+
+const payload = {
+  clientName: 'string',
+  clientDocument: 'string',
+  clientType: PersonType.PESSOA_FISICA,
+  clientMail: 'string',
+  clientSecondaryMail: 'string',
+  clientPhone: 'string',
+  clientBirthDate: '0000-00-00',
+  billingStreet: 'string',
+  billingNumber: 'string',
+  billingComplement: 'string',
+  billingNeighbourhood: 'string',
+  billingCity: 'string',
+  billingState: State.SAO_PAULO,
+  billingPostcode: '00000-000',
+  description: 'string',
+  reference: 'string',
+  amount: 3.0,
+  dueDate: '0000-00-00',
+  installments: 1,
+  maxOverdueDays: 0,
+  fine: 0,
+  interest: 0,
+  abbreviate: true,
+  logo: 'https://example.com/logo.png',
+  notificationUrl: 'string',
+  showTop: true,
+  split: true,
+  splitType: SplitType.PERCENTAGE,
+  splitAmount: [0, 0],
+  splitToken: ['string', 'string'],
+};
+
+const config = new Configuration({
+  token: 'string',
+  env: Environment.SANDBOX,
+});
+
+const boleto = new Boleto(config);
+
+const response = await boleto.emission(payload);
+
+if (response.success) {
+  const data = response.data;
+} else {
+  const error = response.error;
+  const code = error.code;
+  const message = error.message;
+}
+```
+
 ```typescript
+import { Boleto, Configuration } from '../src';
+import {
+  ConfigurationInterface,
+  BoletoInterface,
+  ResponseInterface,
+  Emission,
+  EmissionResponse,
+} from '../src/interfaces';
+import { PersonType, State, Environment, SplitType } from '../src/enum';
+
+const payload: Emission = {
+  clientName: 'string',
+  clientDocument: 'string',
+  clientType: PersonType.PESSOA_FISICA,
+  clientMail: 'string',
+  clientSecondaryMail: 'string',
+  clientPhone: 'string',
+  clientBirthDate: '0000-00-00',
+  billingStreet: 'string',
+  billingNumber: 'string',
+  billingComplement: 'string',
+  billingNeighbourhood: 'string',
+  billingCity: 'string',
+  billingState: State.SAO_PAULO,
+  billingPostcode: '00000-000',
+  description: 'string',
+  reference: 'string',
+  amount: 3.0,
+  dueDate: '0000-00-00',
+  installments: 1,
+  maxOverdueDays: 0,
+  fine: 0,
+  interest: 0,
+  abbreviate: true,
+  logo: 'https://example.com/logo.png',
+  notificationUrl: 'string',
+  showTop: true,
+  split: true,
+  splitType: SplitType.PERCENTAGE,
+  splitAmount: [0, 0],
+  splitToken: ['string', 'string'],
+};
+
+const config: ConfigurationInterface = new Configuration({
+  token: 'string',
+  env: Environment.SANDBOX,
+});
+
+const boleto: BoletoInterface = new Boleto(config);
+
+const response: ResponseInterface<EmissionResponse> = await boleto.emission(payload);
+
+if (response.success) {
+  const data: EmissionResponse = response.data;
+} else {
+  const error: Error = response.error;
+  const code: string = error.code;
+  const message: string = error.message;
+}
 ```
 
 #### Consulta
