@@ -4,15 +4,15 @@ export interface Transaction {
   clientType: string;
   clientMail: string;
   clientPhone: string;
-  clientSecondaryMail: string;
-  clientBirthDate: string;
+  clientSecondaryMail?: string;
+  clientBirthDate?: string;
   billingStreet: string;
   billingNumber: string;
   billingNeighbourhood: string;
   billingCity: string;
   billingState: string;
   billingPostcode: string;
-  billingComplement: string;
+  billingComplement?: string;
   billingResponsible: string;
   deliveryStreet: string;
   deliveryNumber: string;
@@ -20,7 +20,7 @@ export interface Transaction {
   deliveryCity: string;
   deliveryState: string;
   deliveryPostcode: string;
-  deliveryComplement: string;
+  deliveryComplement?: string;
   deliveryResponsible: string;
   cardOwnerName: string;
   cardOwnerType: string;
@@ -36,9 +36,9 @@ export interface Transaction {
   value: number;
   parcelNumber: number;
   capture: boolean;
-  abbreviate: boolean;
-  ipAddress: string;
-  os: string;
-  notificationUrl: string;
-  browser: string;
+  abbreviate?: boolean;
+  ipAddress?: string;
+  os?: string;
+  notificationUrl?: string;
+  browser?: string;
 }
