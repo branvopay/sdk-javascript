@@ -1047,3 +1047,54 @@ if (response.success) {
   const message: string = error.message;
 }
 ```
+
+### Consulta
+
+#### Consulta de BIN
+
+```javascript
+import { Configuration, Consulta } from 'branvopay';
+
+const bin = 'string';
+
+const config = new Configuration({
+  token: 'string',
+  env: Environment.SANDBOX,
+});
+
+const consulta = new Consulta(config);
+
+const response = await consulta.bin(bin);
+
+if (response.success) {
+  const data = response.data;
+} else {
+  const error = response.error;
+  const code = error.code;
+  const message = error.message;
+}
+```
+
+```typescript
+import { Configuration, Consulta } from 'branvopay';
+import { ConfigurationInterface, ConsultaInterface, ResponseInterface, BinResponse, Error } from 'branvopay/interfaces';
+
+const bin: string = 'string';
+
+const config: ConfigurationInterface = new Configuration({
+  token: 'string',
+  env: Environment.SANDBOX,
+});
+
+const consulta: ConsultaInterface = new Consulta(config);
+
+const response: ResponseInterface<BinResponse> = await consulta.bin(bin);
+
+if (response.success) {
+  const data: BinResponse = response.data;
+} else {
+  const error: Error = response.error;
+  const code: string = error.code;
+  const message: string = error.message;
+}
+```
