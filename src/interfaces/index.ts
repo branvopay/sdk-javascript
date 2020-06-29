@@ -18,3 +18,5 @@ export * from './recorrencia-model';
 export * from './recorrencia-response';
 export * from './bin-response';
 export * from './consulta';
+export * from './consulta-cartao';
+export * from './consulta-cartao-response';

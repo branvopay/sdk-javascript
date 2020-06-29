@@ -1098,3 +1098,69 @@ if (response.success) {
   const message: string = error.message;
 }
 ```
+
+#### Validação de Cartão
+
+```javascript
+import { Configuration, Consulta } from 'branvopay';
+
+const payload = {
+  number: 'string',
+  flag: 'string',
+  date: 'string',
+  code: 'string',
+};
+
+const config = new Configuration({
+  token: 'string',
+  env: Environment.SANDBOX,
+});
+
+const consulta = new Consulta(config);
+
+const response = await consulta.cartao(payload);
+
+if (response.success) {
+  const data = response.data;
+} else {
+  const error = response.error;
+  const code = error.code;
+  const message = error.message;
+}
+```
+
+```typescript
+import { Configuration, Consulta } from 'branvopay';
+import {
+  ConfigurationInterface,
+  ConsultaInterface,
+  ResponseInterface,
+  ConsultaCartao,
+  ConsultaCartaoResponse,
+  Error,
+} from 'branvopay/interfaces';
+
+const payload: ConsultaCartao = {
+  number: 'string',
+  flag: 'string',
+  date: 'string',
+  code: 'string',
+};
+
+const config: ConfigurationInterface = new Configuration({
+  token: 'string',
+  env: Environment.SANDBOX,
+});
+
+const consulta: ConsultaInterface = new Consulta(config);
+
+const response: ResponseInterface<ConsultaCartaoResponse> = await consulta.cartao(payload);
+
+if (response.success) {
+  const data: ConsultaCartaoResponse = response.data;
+} else {
+  const error: Error = response.error;
+  const code: string = error.code;
+  const message: string = error.message;
+}
+```
