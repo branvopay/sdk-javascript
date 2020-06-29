@@ -29,4 +29,9 @@ export interface Emission {
   splitType?: string;
   splitAmount?: number[];
   splitToken?: string[];
+  recurrent?: boolean;
+  frequence?: string;
+  dayNumber?: string;
+  startDate?: string;
+  finalDate?: string;
 }
