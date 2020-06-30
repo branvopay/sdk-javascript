@@ -1,6 +1,6 @@
 {
   "name": "branvopay",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "SDK de Integração Api Branvopay",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
