@@ -1,9 +1,11 @@
+import { StatusTransaction } from './status-transaction';
 export interface CreditCard {
     number: string;
     holder: string;
     date: string;
 }
 export interface Address {
+    postcode: string;
     street: string;
     number: string;
     complement: string;
@@ -14,7 +16,7 @@ export interface Address {
 export interface GetResponse {
     code: number;
     ordernumber: string;
-    status: number;
+    status: StatusTransaction;
     statusdescription: string;
     clientname: string;
     clientdocument: string;
@@ -28,9 +30,9 @@ export interface GetResponse {
     browser: string;
     dateanalysis: string;
     notificationurl: string;
-    datecreate: string;
-    creditcard: CreditCard;
+    creditCard: CreditCard;
     address: Address;
-    billingaddress: Address;
-    accountname: string;
+    billingAddress: Address;
+    accountName: string;
+    totalVoided: number;
 }

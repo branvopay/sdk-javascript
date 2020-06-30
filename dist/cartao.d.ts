@@ -14,6 +14,6 @@ export declare class Cartao extends Api implements CartaoInterface {
     transaction(payload: Transaction): Promise<ResponseInterface<TransactionResponse>>;
     split(payload: Split): Promise<ResponseInterface<SplitResponse>>;
     get(orderNumber: string): Promise<ResponseInterface<GetResponse>>;
-    cancel(orderNumber: string): Promise<ResponseInterface<CancelResponse[]>>;
+    cancel(orderNumber: string, amount?: number): Promise<ResponseInterface<CancelResponse[]>>;
     capture(orderNumber: string): Promise<ResponseInterface<CaptureResponse>>;
 }
