@@ -2,7 +2,7 @@
 
 ## Instalação
 
-`npm install BranvoPay`
+`npm install branvopay` or `yarn add branvopay`
 
 ## Uso
 
